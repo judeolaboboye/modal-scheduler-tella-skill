@@ -1,0 +1,38 @@
+# Alternative to Modal: run the scheduler with GitHub Actions (free minutes on a private
+# repo, unlimited on a public one). UNTESTED EXAMPLE - adapt it to your repo.
+#
+# 1. Put this skill's scripts/ folder in a PRIVATE repo of yours.
+# 2. Copy this file to .github/workflows/tella-schedule.yml in that repo.
+# 3. Repo -> Settings -> Secrets and variables -> Actions -> add TELLA_API_KEY.
+# 4. Schedule from your computer with the file queue, then commit and push queue.json:
+#      TELLA_SCHEDULE_QUEUE=queue.json python scripts/schedule.py plan batch.json --go
+#      git add queue.json && git commit -m "schedule" && git push
+#    (pull before you run `status`, the workflow commits the results back.)
+#
+# GitHub often starts scheduled workflows 5 to 30 minutes late. Posts go out when the
+# run actually starts, so treat times as "around", not "exactly".
+name: tella-schedule
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency: tella-schedule
+jobs:
+  tick:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python scripts/run_once.py queue.json
+        env:
+          TELLA_API_KEY: ${{ secrets.TELLA_API_KEY }}
+      - name: Save results
+        run: |
+          git config user.name "tella-schedule"
+          git config user.email "actions@users.noreply.github.com"
+          git add queue.json
+          git diff --cached --quiet || (git commit -m "queue update" && git push)

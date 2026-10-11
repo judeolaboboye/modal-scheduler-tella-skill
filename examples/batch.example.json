@@ -1,0 +1,20 @@
+{
+  "posts": [
+    {
+      "videoId": "vid_REPLACE_ME_1",
+      "title": "Why your AI prompts give generic answers",
+      "description": "The model is not broken. The instruction is. #Shorts #AI",
+      "destinations": ["youtube_shorts", "x", "linkedin"],
+      "subtitles": true,
+      "x": { "description": "AI isn't broken. Your instructions are." },
+      "linkedin": { "description": "A longer LinkedIn version of the post text goes here." }
+    },
+    {
+      "videoId": "vid_REPLACE_ME_2",
+      "title": "The 5-step prompt framework",
+      "description": "Role, context, task, constraints, examples.",
+      "destinations": ["youtube_shorts", "x"],
+      "privacy": "public"
+    }
+  ]
+}

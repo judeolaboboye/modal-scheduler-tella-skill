@@ -1,0 +1,8 @@
+.env
+.env.*
+!.env.example
+queue.json
+*.tmp
+__pycache__/
+.venv/
+.DS_Store
