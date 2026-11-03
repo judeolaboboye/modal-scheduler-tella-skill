@@ -550,7 +550,7 @@ Never run both on the same posts. The double-post check protects you, but don't 
 | cron / launchd / Task Scheduler | Free; your computer has to stay on |
 | VPS / Raspberry Pi | What the machine costs you |
 | Tella | Your plan with API keys and social publishing |
-| Buffer (TikTok, Threads, Substack) | Free plan for a few channels |
+| Buffer (TikTok, Threads, Substack) | Free plan: 3 channels, exactly these three |
 
 Prices and free limits change. Check modal.com/pricing and GitHub's Actions billing
 page before relying on the numbers here.
@@ -562,8 +562,8 @@ page before relying on the numbers here.
 Tella's API can't post to these three, so neither this skill nor any cron can. A free
 [Buffer](https://buffer.com) account can. Buffer connects to TikTok, Threads and Substack
 and posts your video at the time you choose. Use the same video you finished in Tella.
-The free plan is enough for a few channels (check [buffer.com/pricing](https://buffer.com/pricing)
-for today's limit). If you need more, connect the channels you post to most.
+The free plan allows **3 channels**, which fits exactly TikTok, Threads and Substack. Post to
+Instagram and Facebook through Tella (this skill), so they don't use up a Buffer channel.
 
 ### 12.1 Create the account and connect the channels **(you)**
 

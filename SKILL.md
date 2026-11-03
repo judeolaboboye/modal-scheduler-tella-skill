@@ -26,7 +26,7 @@ Nothing has to stay open: not Tella, not the user's computer, not this chat.
 | Threads, Substack | **No** | Tella does not publish to them at all |
 
 Say this to the user up front if they mention any of the "No" platforms. For those,
-**For TikTok, Threads and Substack, use a free Buffer account.** Buffer's free plan is enough to connect these channels (it covers a few channels; check buffer.com/pricing for today's number). Export or download the finished video from Tella, upload it to Buffer, add the caption and pick the time. Buffer then posts it. Full steps: `SETUP_GUIDE.md` section 12.
+**For TikTok, Threads and Substack, use a free Buffer account.** Buffer's free plan allows exactly **3 channels**, which is exactly these three: TikTok, Threads and Substack. Export or download the finished video from Tella, upload it to Buffer, add the caption and pick the time. Buffer then posts it. Full steps: `SETUP_GUIDE.md` section 12.
 
 Instagram and Facebook come through **one Facebook connection** in Tella (Settings → Connections). Instagram has to be a professional (Business or Creator) account linked to a Facebook Page, which is Meta's rule for outside publishing.
 
