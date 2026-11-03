@@ -1,6 +1,6 @@
 ---
 name: tella-schedule
-description: Schedule Tella videos to post later to YouTube, YouTube Shorts, LinkedIn, X, Instagram (post, reel, story) and Facebook (post, story) without opening Tella. Tella's API has no schedule option, so this queues each post with a time and a free cloud cron (Modal by default; GitHub Actions or any cron as alternatives) publishes it through the Tella API when due. Use when the user says "schedule this Tella video", "post these clips at different times today", "drip my Tella clips", "/tella-schedule", or asks how to schedule Tella posts. Does NOT cover TikTok, Threads or Substack.
+description: Schedule Tella videos to post later to YouTube, YouTube Shorts, LinkedIn, X, Instagram (post, reel, story) and Facebook (post, story) without opening Tella. Tella's own scheduling stops at 30 days ahead, so this queues each post with a time and a free cloud cron (Modal by default; GitHub Actions or any cron as alternatives) publishes it through the Tella API when due. Use when the user says "schedule this Tella video", "post these clips at different times today", "drip my Tella clips", "/tella-schedule", or asks how to schedule Tella posts. Does NOT cover TikTok, Threads or Substack: for those, point the user to a free Buffer account (SETUP_GUIDE.md section 12).
 ---
 
 # Tella Schedule
@@ -26,7 +26,7 @@ Nothing has to stay open: not Tella, not the user's computer, not this chat.
 | Threads, Substack | **No** | Tella does not publish to them at all |
 
 Say this to the user up front if they mention any of the "No" platforms. For those,
-they need the Tella app (TikTok) or another tool such as Buffer (Threads, Substack).
+**For TikTok, Threads and Substack, use a free Buffer account.** Buffer's free plan is enough to connect these channels (it covers a few channels; check buffer.com/pricing for today's number). Export or download the finished video from Tella, upload it to Buffer, add the caption and pick the time. Buffer then posts it. Full steps: `SETUP_GUIDE.md` section 12.
 
 Instagram and Facebook come through **one Facebook connection** in Tella (Settings → Connections). Instagram has to be a professional (Business or Creator) account linked to a Facebook Page, which is Meta's rule for outside publishing.
 

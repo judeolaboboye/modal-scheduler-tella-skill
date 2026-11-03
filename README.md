@@ -30,11 +30,10 @@ This only schedules what Tella's API can publish. Be clear on this before you in
 |---|---|---|
 | YouTube, YouTube Shorts, LinkedIn, X | Yes | |
 | Instagram (post, reel, story), Facebook (post, story) | Yes | Through one Facebook connection in Tella; Instagram must be a Business/Creator account linked to a Page |
-| **TikTok** | No | TikTok requires its consent form on every post, so Tella only posts to TikTok from inside the Tella app. No outside tool can do it for you. |
-| **Threads, Substack** | No | Tella does not publish to them at all. |
+| **TikTok** | No | Tella's API can't post to TikTok (TikTok needs its consent form on every post). Use a free Buffer account (below), or schedule it in the Tella app. |
+| **Threads, Substack** | No | Tella doesn't publish to them. Use a free Buffer account (below). |
 
-For those you still use the Tella app (TikTok) or a separate tool such as Buffer
-(Threads, Substack). This skill does not replace that.
+**For TikTok, Threads and Substack, use a free Buffer account.** Buffer's free plan is enough to connect these channels (it covers a few channels; check buffer.com/pricing for today's number). Export or download the finished video from Tella, upload it to Buffer, add the caption and pick the time. Buffer then posts it. Full steps: `SETUP_GUIDE.md` section 12.
 
 It also does not edit, cut or caption videos. The video must be finished in Tella.
 

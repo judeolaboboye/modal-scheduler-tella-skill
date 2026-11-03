@@ -45,7 +45,8 @@ If you are not sure, pick **A. Modal**.
 
 **Not covered by any option:** TikTok (Tella posts it only from inside its app, because
 TikTok needs its consent form on every post), Threads and Substack (Tella doesn't post
-there). Use the Tella app or a tool such as Buffer for those.
+there). For those, a **free Buffer account** is enough: you upload the Tella video to Buffer
+and schedule it there. Section 12 has the steps.
 
 **Instagram and Facebook are covered**: Instagram post, reel and story; Facebook post and story.
 Instagram and Facebook come through **one Facebook connection** in Tella (Settings → Connections). Instagram has to be a professional (Business or Creator) account linked to a Facebook Page, which is Meta's rule for outside publishing.
@@ -549,10 +550,61 @@ Never run both on the same posts. The double-post check protects you, but don't 
 | cron / launchd / Task Scheduler | Free; your computer has to stay on |
 | VPS / Raspberry Pi | What the machine costs you |
 | Tella | Your plan with API keys and social publishing |
+| Buffer (TikTok, Threads, Substack) | Free plan for a few channels |
 
 Prices and free limits change. Check modal.com/pricing and GitHub's Actions billing
 page before relying on the numbers here.
 
 ---
 
-MIT. Not affiliated with Tella, Modal or GitHub.
+## 12. TikTok, Threads and Substack: a free Buffer account
+
+Tella's API can't post to these three, so neither this skill nor any cron can. A free
+[Buffer](https://buffer.com) account can. Buffer connects to TikTok, Threads and Substack
+and posts your video at the time you choose. Use the same video you finished in Tella.
+The free plan is enough for a few channels (check [buffer.com/pricing](https://buffer.com/pricing)
+for today's limit). If you need more, connect the channels you post to most.
+
+### 12.1 Create the account and connect the channels **(you)**
+
+1. Go to **https://buffer.com** → **Get started**. Sign up with email or Google, and
+   choose the **Free** plan.
+2. **Channels → Connect a channel**, then for each one:
+   - **TikTok:** sign in to TikTok in the window Buffer opens and approve Buffer.
+   - **Threads:** sign in with the Instagram account your Threads profile belongs to and approve it.
+   - **Substack:** sign in to Substack and pick your publication. Buffer posts to it as Substack Notes.
+3. The channels show in Buffer's left sidebar. A channel marked "reconnect" needs
+   step 2 again.
+
+### 12.2 Get the video out of Tella
+
+1. Open the finished video in Tella → **Download** (or Share → Download) → MP4. For
+   TikTok and Threads use a vertical (9:16) video.
+2. Want captions burned in? Turn subtitles on in the export first.
+
+### 12.3 Schedule it in Buffer **(you, or your agent with you)**
+
+1. **Create post** → tick the channels (TikTok, Threads, Substack…).
+2. **Upload** the MP4 from Tella and paste the caption. Buffer lets you change the text
+   per channel, so TikTok can keep hashtags and Substack can read like a note.
+3. **Schedule** → pick the date and time (Buffer uses the timezone in its settings; set
+   yours under Settings → General) → **Schedule post**.
+4. Check **Queue**: the post sits there until its time, then Buffer posts it and shows it under **Sent**.
+
+Use the same times as the rest of your plan (from `schedule.py status`), so each clip
+goes out everywhere around the same time.
+
+### 12.4 Having your agent do it
+
+Buffer has an API, but it takes a **public link** to the video file, not an upload from
+your computer. The usual way: export the video in Tella, use that export's download
+link as the video link in Buffer, and **don't schedule further ahead than that link
+stays valid**. Without an API key, the agent prepares the captions and times and you
+upload in Buffer, which takes a minute per post.
+
+TikTok has a second option: schedule it right inside Tella (clip → **Share → Publish → TikTok →
+"At a time I pick"**, up to 30 days ahead). Then you don't need Buffer for TikTok.
+
+---
+
+MIT. Not affiliated with Tella, Modal, GitHub or Buffer.
