@@ -39,6 +39,8 @@ they need the Tella app (TikTok, Instagram, Facebook) or another tool such as Bu
 Never print the API key, never write it anywhere but `.env`.
 
 ## First-time setup
+The full walk-through for the user (Modal account, deploy, test post, and every
+alternative scheduler with exact steps) is `SETUP_GUIDE.md`. Follow it with them.
 1. `python scripts/schedule.py accounts` → confirms the key and lists connected accounts.
    Any account marked `RECONNECT IN TELLA` must be fixed by the user in Tella first.
 2. Ask the user to run `scripts/deploy_modal.sh` **themselves** (it stores the key as a

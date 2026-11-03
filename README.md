@@ -37,6 +37,9 @@ such as Buffer (Instagram, Threads, Substack). This skill does not replace that.
 
 It also does not edit, cut or caption videos. The video must be finished in Tella.
 
+**New to this? The full step-by-step guide, from creating your Modal account to the
+GitHub Actions / cron / launchd / Windows alternatives, is [SETUP_GUIDE.md](SETUP_GUIDE.md).**
+
 ## Requirements
 
 1. **Tella** with API access: an API key from *Settings → API Keys*, and your social
@@ -157,6 +160,7 @@ author runs. The GitHub Actions example is untested. Do the private test post in
 
 ```
 SKILL.md                    instructions for the agent
+SETUP_GUIDE.md              full setup: Modal account, deploy, test, every alternative scheduler
 scripts/schedule.py         the CLI (add, plan, status, cancel, retry, pause, resume)
 scripts/runner.py           one pass over the queue
 scripts/modal_app.py        Modal cron that calls the runner
