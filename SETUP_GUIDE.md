@@ -16,13 +16,15 @@ accounts, signing in, copying your key, and running the deploy script.
 
 ## 0. What you are building
 
-Tella can publish a video to YouTube, YouTube Shorts, LinkedIn and X, but only *right
-now*: its API has no "post at 3 pm". This skill adds the missing schedule:
+Tella can publish a video to YouTube, YouTube Shorts, LinkedIn, X, Instagram and Facebook.
+Its API can hold a post for later, but at most 30 days ahead, and it posts exactly what
+the video looked like when you scheduled it. This skill keeps your own queue with no
+limit on how far ahead, and it checks for double posts. It works like this:
 
 ```
 your agent / you ──► schedule.py ──► the queue (a list of posts with times)
                                           │
-              a cron, every 10 min ───────┘──► runner.py ──► Tella API ──► YouTube / Shorts / LinkedIn / X
+              a cron, every 10 min ───────┘──► runner.py ──► Tella API ──► YouTube / Shorts / LinkedIn / X / IG / FB
 ```
 
 - **The queue** holds each post: which video, where to, title, text, when.
@@ -41,16 +43,23 @@ The only choice you make is **where the queue and the cron live**:
 
 If you are not sure, pick **A. Modal**.
 
-**Not covered by any option:** TikTok, Instagram, Facebook (Tella posts those only from
-inside its app), Threads and Substack (Tella does not post there). Use the Tella app or
-a tool such as Buffer for those.
+**Not covered by any option:** TikTok (Tella posts it only from inside its app, because
+TikTok needs its consent form on every post), Threads and Substack (Tella doesn't post
+there). Use the Tella app or a tool such as Buffer for those.
+
+**Instagram and Facebook are covered**: Instagram post, reel and story; Facebook post and story.
+Instagram and Facebook come through **one Facebook connection** in Tella (Settings → Connections). Instagram has to be a professional (Business or Creator) account linked to a Facebook Page, which is Meta's rule for outside publishing.
 
 ---
 
 ## 1. Things you need first (all options)
 
 1. **A Tella account with API access** and your social accounts connected:
-   Tella → **Settings → Connections** → connect YouTube, LinkedIn and/or X. **(you)**
+   Tella → **Settings → Connections** → connect YouTube, LinkedIn, X and/or Facebook
+   (the Facebook connection also brings in Instagram). **(you)** For Instagram: in the
+   Instagram app, switch to a professional account (Settings → Account type and tools)
+   and link it to a Facebook Page. Then choose the default Page and Instagram account in
+   Tella's Connections.
 2. **A Tella API key:** Tella → **Settings → API Keys → Create key**. Copy it; you
    paste it in step 3. **(you)** Treat it like a password. Never paste it into a chat,
    a screenshot, a commit or a public file.
@@ -104,7 +113,7 @@ TELLA_SCHEDULE_TZ=Africa/Lagos
 python3 scripts/schedule.py accounts
 ```
 
-You should see each connected account (YouTube, LinkedIn, X) with its ID. If an account
+You should see each connected account (YouTube, LinkedIn, X, Facebook/Instagram) with its ID. If an account
 says **RECONNECT IN TELLA**, reconnect it in Tella → Settings → Connections before going
 on. If it says the key is missing or gives a `401` error, the key in `.env` is wrong or was
 deleted in Tella.
@@ -272,8 +281,10 @@ python3 scripts/schedule.py plan my-batch.json --date tomorrow --window 08:00-21
 again on `--go`, so they differ from the preview. That's on purpose.
 
 Batch file fields, per video: `videoId`, `title`, `description`, `destinations`
-(`youtube`, `youtube_shorts`, `linkedin`, `x`), and optional `privacy`
-(`public|unlisted|private`, X is always public), `subtitles` (true = burn Tella's
+(`youtube`, `youtube_shorts`, `linkedin`, `x`, `instagram_post`, `instagram_reel`,
+`instagram_story`, `facebook_post`, `facebook_story`), and optional `privacy`
+(`public|unlisted|private` for YouTube and Facebook posts, `public|private` for LinkedIn;
+X, Instagram and Facebook stories are always public), `subtitles` (true = burn Tella's
 subtitles in), and per-destination text such as `"x": {"description": "shorter text"}`.
 
 | Need | Command |
@@ -284,7 +295,9 @@ subtitles in), and per-destination text such as `"x": {"description": "shorter t
 | Pause / resume all posting | `schedule.py pause` / `resume` |
 
 Platform limits Tella enforces: Shorts must be vertical or square and at most 3 min;
-LinkedIn at most 30 min; X at most 20 min (longer with Premium).
+LinkedIn at most 30 min; X at most 20 min (longer with Premium); Instagram post/reel at
+most 15 min and 300 MB, Instagram story at most 60 s and 100 MB; Facebook story vertical
+and at most 60 s; no 4K export for Instagram; stories show no text.
 
 ---
 

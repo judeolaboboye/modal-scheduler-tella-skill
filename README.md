@@ -1,11 +1,12 @@
 # Tella Schedule — a scheduler skill for Tella (Modal, free)
 
 Schedule your [Tella](https://www.tella.com) videos to go out later on **YouTube,
-YouTube Shorts, LinkedIn and X**, without opening Tella for each one.
+YouTube Shorts, LinkedIn, X, Instagram and Facebook**, without opening Tella for each one.
 
-Tella can publish a video to your social accounts, but only *right now*. There is no
-"post this at 3 pm" in its API or its MCP server. If you make seven clips, you either
-post seven times by hand through the day or dump all seven at once.
+Tella can publish a video to your social accounts. Its own scheduling only reaches 30
+days ahead, and it posts the export made when you scheduled it. This skill keeps your
+own queue with no limit on how far ahead, spaces posts out, and never posts a video
+twice to the same place.
 
 This skill adds the missing piece. Your AI agent (Claude Code, Codex, Antigravity,
 Cursor…) puts each post in a queue with a time. A tiny cloud job on
@@ -18,7 +19,7 @@ agent → schedule.py plan batch.json        (shows you the times)
 you: "yes"
 agent → schedule.py plan batch.json --go   (posts are queued in the cloud)
                  │
-     Modal cron, every 10 min ──► Tella API ──► YouTube / Shorts / LinkedIn / X
+     Modal cron, every 10 min ──► Tella API ──► YouTube / Shorts / LinkedIn / X / Instagram / Facebook
 ```
 
 ## What it does not do
@@ -28,12 +29,12 @@ This only schedules what Tella's API can publish. Be clear on this before you in
 | Platform | Works? | Why not |
 |---|---|---|
 | YouTube, YouTube Shorts, LinkedIn, X | Yes | |
+| Instagram (post, reel, story), Facebook (post, story) | Yes | Through one Facebook connection in Tella; Instagram must be a Business/Creator account linked to a Page |
 | **TikTok** | No | TikTok requires its consent form on every post, so Tella only posts to TikTok from inside the Tella app. No outside tool can do it for you. |
-| **Instagram, Facebook** | No | Tella posts to them from the app, but its API does not offer them yet. |
 | **Threads, Substack** | No | Tella does not publish to them at all. |
 
-For those you still use the Tella app (TikTok, Instagram, Facebook) or a separate tool
-such as Buffer (Instagram, Threads, Substack). This skill does not replace that.
+For those you still use the Tella app (TikTok) or a separate tool such as Buffer
+(Threads, Substack). This skill does not replace that.
 
 It also does not edit, cut or caption videos. The video must be finished in Tella.
 

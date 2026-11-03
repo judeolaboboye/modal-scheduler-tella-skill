@@ -78,6 +78,8 @@ def random_times(k, start, end, gap):
 def make(video, dest, t, title, description, privacy="public", subtitles=False, account=None):
     if dest not in tella_api.DESTINATIONS:
         sys.exit(f"'{dest}' is not something the Tella API can post to. Use: {', '.join(tella_api.DESTINATIONS)}")
+    if privacy != "public" and privacy not in tella_api.PRIVACY.get(dest, ("public",)):
+        sys.exit(f"{dest} can't be '{privacy}'. It takes: {', '.join(tella_api.PRIVACY.get(dest, ('public',)))}")
     if not title:
         sys.exit("every post needs a title")
     return {"id": f"{video}-{dest}", "videoId": video, "destination": dest, "title": title,
@@ -183,7 +185,7 @@ def main():
     sub.add_parser("accounts")
     p = sub.add_parser("add")
     p.add_argument("--video", required=True)
-    p.add_argument("--to", required=True, help="comma list: youtube,youtube_shorts,linkedin,x")
+    p.add_argument("--to", required=True, help="comma list: youtube,youtube_shorts,linkedin,x,instagram_post,instagram_reel,instagram_story,facebook_post,facebook_story")
     p.add_argument("--title", required=True)
     p.add_argument("--description")
     g = p.add_mutually_exclusive_group()

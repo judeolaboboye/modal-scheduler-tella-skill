@@ -9,7 +9,10 @@ import urllib.request
 from pathlib import Path
 
 API = "https://api.tella.com/v1"
-DESTINATIONS = ("youtube", "youtube_shorts", "linkedin", "x")  # all the Tella API can publish to
+DESTINATIONS = ("youtube", "youtube_shorts", "linkedin", "x", "instagram_post", "instagram_reel", "instagram_story",
+                "facebook_post", "facebook_story")  # all the Tella API can publish to (Instagram/Facebook: one Facebook connection)
+PRIVACY = {"youtube": ("public", "unlisted", "private"), "youtube_shorts": ("public", "unlisted", "private"),
+           "linkedin": ("public", "private"), "facebook_post": ("public", "unlisted", "private")}  # the rest: public only
 
 
 def _load_env():
@@ -60,6 +63,6 @@ def publish(item):
         body["accountId"] = item["accountId"]
     if item.get("subtitles"):
         body["export"] = {"subtitles": True}
-    if item["destination"] != "x":  # X is always public
+    if item["destination"] in PRIVACY:  # X, Instagram and Facebook stories are always public
         body["privacy"] = item.get("privacy", "public")
     return call("POST", f"/videos/{item['videoId']}/publish", body)["publication"]
