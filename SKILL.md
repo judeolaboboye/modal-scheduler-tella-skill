@@ -109,6 +109,9 @@ scheduler was down), so it was not posted at an odd hour.
 ## How it works (for debugging)
 - `scripts/schedule.py` — the CLI. Writes items to the queue.
 - `scripts/runner.py` — one pass: follow up on uploads, publish what is due.
+  Also `refresh()` (every 12 h on Modal: rewrites waiting posts, because Modal deletes Dict
+  entries untouched for 7 days) and the YouTube daily-limit guard (status `limit` → moved to
+  10 min after midnight Pacific, `_youtube_limit_until` blocks attempts until then).
 - `scripts/modal_app.py` — Modal cron (every 10 min) calling the runner. Queue = Modal
   Dict `tella-schedule`, key = Modal secret `tella-schedule`.
 - `scripts/run_once.py` + `scripts/stores.py` — the same runner on a JSON file queue

@@ -20,3 +20,8 @@ image = modal.Image.debian_slim(python_version="3.11").add_local_python_source("
 def tick():
     for line in runner.run(store):
         print(line)
+    try:  # Modal drops Dict entries untouched for 7 days: keep waiting posts alive (every 12 h)
+        for line in runner.refresh(store):
+            print(line)
+    except Exception as e:  # never stop posting over this
+        print("refresh error:", str(e)[:200])

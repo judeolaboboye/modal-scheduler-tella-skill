@@ -121,6 +121,14 @@ timezone, or set `TELLA_SCHEDULE_TZ=Africa/Lagos` (any IANA name) in `.env`.
   minutes apart per platform.
 - **No 3 am surprises.** A post more than 6 hours late is marked `missed`, not posted.
 - **Two tries, then stop.** A post that fails twice stays `failed` until you retry it.
+- **Posts queued weeks ahead don't vanish.** Modal deletes a queue entry that nobody reads
+  or writes for 7 days, and just listing the queue doesn't count. Every 12 hours the
+  scheduler rewrites each waiting post that is more than 5 hours away, so a post booked a
+  month ahead is still there on the day. (Only Modal needs this; a JSON file queue never expires.)
+- **YouTube's daily limit doesn't lose posts.** If YouTube says it "has reached its daily
+  limit on uploads", the post isn't marked failed. That post and every other waiting
+  YouTube post due before the limit resets (midnight Pacific) move to 10 minutes after the
+  reset, in the same order, then go out 20 minutes apart. No attempts are wasted meanwhile.
 - **Your key stays yours.** It lives in your `.env` and your own Modal secret.
 
 Posting many videos a day is your decision. Platforms flag accounts for bursts and

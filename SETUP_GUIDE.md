@@ -310,6 +310,14 @@ and at most 60 s; no 4K export for Instagram; stories show no text.
   minutes apart per platform.
 - **No 3 am surprises.** A post more than 6 hours late is marked `missed`, not posted.
 - **Two tries, then stop.** A post that fails twice stays `failed` until you retry it.
+- **Posts queued weeks ahead don't vanish.** Modal deletes a queue entry that nobody reads
+  or writes for 7 days, and just listing the queue doesn't count. Every 12 hours the
+  scheduler rewrites each waiting post that is more than 5 hours away, so a post booked a
+  month ahead is still there on the day. (Only Modal needs this; a JSON file queue never expires.)
+- **YouTube's daily limit doesn't lose posts.** If YouTube says it "has reached its daily
+  limit on uploads", the post isn't marked failed. That post and every other waiting
+  YouTube post due before the limit resets (midnight Pacific) move to 10 minutes after the
+  reset, in the same order, then go out 20 minutes apart. No attempts are wasted meanwhile.
 - **Your key stays yours:** only in your `.env` and your own scheduler's secret store.
 
 ---
@@ -540,6 +548,8 @@ Never run both on the same posts. The double-post check protects you, but don't 
 | `sent` for a long time | Tella is still rendering and uploading a long video. It becomes `posted` with a link. |
 | GitHub run is red | Click it for the log. Usually a missing `TELLA_API_KEY` secret or a push conflict (step 3 in 8B). |
 | "N posts to … don't fit on …" | Too many posts for the window and gap: pick tomorrow, a smaller `--gap`, or fewer posts. |
+| Posts booked over a week ahead never went out, and `status` doesn't list them | Modal dropped them after 7 days untouched. Fixed since this version: redeploy (`scripts/deploy_modal.sh`) so the 12-hour refresh runs, then schedule those posts again. |
+| YouTube post's note says "daily limit: moved to just after the reset" | YouTube's daily upload limit was hit. Nothing to do: it posts after midnight Pacific. Tip: keep your first YouTube post of the day after the reset (09:15 in Lagos in winter) so it isn't counted against the day before. |
 
 ## 11. Costs at a glance
 
