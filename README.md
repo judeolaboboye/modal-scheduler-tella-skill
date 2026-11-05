@@ -1,5 +1,24 @@
 # Tella Schedule — a scheduler skill for Tella (Modal, free)
 
+## Why I built this
+
+I clip every long-form video I record into about 9 shorts and post them everywhere,
+with my AI agent doing the work through **Tella's Agent MCP**. The MCP can edit, export
+and publish a video, so I expected to just say "post these clips over the week" and
+walk away. That is where it broke:
+
+- **Tella is not a social media scheduler.** The MCP's publish can post now, or book a
+  post at most **30 days** ahead. There is no queue for hundreds of clips.
+- **It posts the export made at booking time.** Fix a caption or a cut after you
+  schedule, and the old version still goes out.
+- **The agent only acts while the chat is open.** It can't come back tomorrow at 2 pm,
+  space posts out, or check that a clip hasn't already gone out.
+
+I didn't want to pay for Buffer just for this, so I built the missing piece: a free
+cron on Modal that calls Tella's API at the times you set. Your agent queues the posts,
+the cron publishes them, and your computer, Tella and the chat can all be closed. It's
+what posts my clips every day.
+
 Schedule your [Tella](https://www.tella.com) videos to go out later on **YouTube,
 YouTube Shorts, LinkedIn, X, Instagram and Facebook**, without opening Tella for each one.
 
